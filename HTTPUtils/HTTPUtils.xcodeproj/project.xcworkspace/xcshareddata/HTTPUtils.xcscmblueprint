@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6F81867F6D731306FE12BE617BA9F2D8F0F684C6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "6F81867F6D731306FE12BE617BA9F2D8F0F684C6" : 9223372036854775807,
+    "0672E5EACE52B4B411644A3AFA98259B3A9653BD" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "98C22CCA-70C4-4084-8BF2-47A589F72016",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "6F81867F6D731306FE12BE617BA9F2D8F0F684C6" : "ios-utilities\/",
+    "0672E5EACE52B4B411644A3AFA98259B3A9653BD" : "ios-external-utilities\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "HTTPUtils",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HTTPUtils\/HTTPUtils.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:spineo\/ios-external-utilities.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0672E5EACE52B4B411644A3AFA98259B3A9653BD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:spineo\/ios-utilities.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F81867F6D731306FE12BE617BA9F2D8F0F684C6"
+    }
+  ]
+}
