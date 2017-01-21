@@ -38,7 +38,7 @@
     
     __block BOOL stat = FALSE;
     
-    // Cleanup
+    // Need to extends URL string encoding (use a generic method)
     //
     urlStr = [urlStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     
