@@ -7,14 +7,15 @@
 //
 
 #import "HTTPUtils.h"
-#import "GlobalSettings.h"
-#import "FileUtils.h"
+
+// Requires these External Utilities
+//
 #import "Reachability.h"
 #import "NSData+Base64.h"
 
 @implementation HTTPUtils
 
-// Check for network connectivity
+// networkIsReachable: Check for network connectivity
 //
 + (BOOL)networkIsReachable {
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
@@ -26,7 +27,12 @@
     }
 }
 
-// HTTP Get wrapper
+// HTTPGet: HTTP GET wrapper that optionally enables Basic Authorization
+// Parameters:
+// urlStr     : Target URL
+// contentType: HTTP Content-Type
+// fileName   : Name of file writting content to
+// authToken  : Optional authorization token (i.e., colon delimited user and password)
 //
 + (BOOL)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName authToken:(NSString *)authToken {
     
@@ -77,6 +83,5 @@
     
     return stat;
 }
-
 
 @end
