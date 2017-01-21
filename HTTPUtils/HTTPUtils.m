@@ -28,7 +28,7 @@
 
 // HTTP Get wrapper
 //
-+ (BOOL)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName {
++ (BOOL)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName authToken:(NSString *)authToken {
     
     __block BOOL stat = FALSE;
     
@@ -46,21 +46,14 @@
     request.HTTPMethod = @"GET";
     [request setValue:[[NSString alloc] initWithFormat:@"%@", contentType] forHTTPHeaderField:@"Content-Type"];
 
-    // Add a file check
-    //
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:AUTHTOKEN_FILE ofType:@"txt"];
-
-    NSString *authToken = [FileUtils lineFromFile:filePath];
-    if (authToken == nil) {
-        NSLog(@"Failed to get the authorization token(s) from file '%@'\n", filePath);
-        return stat;
+    if (authToken != nil) {
+        NSData *authData = [authToken dataUsingEncoding:NSASCIIStringEncoding];
+        NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
+        [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+    } else {
+        NSLog(@"Note: The value for 'authToken' is nil");
     }
 
-    NSData *authData = [authToken dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
-    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
-    
-    
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
 
     NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
