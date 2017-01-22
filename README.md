@@ -6,3 +6,5 @@ The categories include:
 FileUtils - Utilities used for file operations
 
 HTTPUtils - Utilities used for HTTP and Network Connectivity operations
+
+ColorUtils - Utilities to manipulate Colors and Images (in progress - still needs cleanup, add a few more)
