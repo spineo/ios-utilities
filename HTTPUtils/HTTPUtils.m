@@ -1,6 +1,5 @@
 //
 //  HTTPUtils.m
-//  AcrylicsColorPicker
 //
 //  Created by Stuart Pineo on 12/8/16.
 //  Copyright © 2016 Stuart Pineo. All rights reserved.
@@ -15,7 +14,7 @@
 
 @implementation HTTPUtils
 
-// networkIsReachable: Check for network connectivity
+// networkIsReachable - Check for network connectivity
 //
 + (BOOL)networkIsReachable {
     Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
@@ -27,7 +26,7 @@
     }
 }
 
-// HTTPGet: HTTP GET wrapper that optionally enables Basic Authorization
+// HTTPGet - HTTP GET wrapper that optionally enables Basic Authorization
 // Parameters:
 // urlStr     : Target URL
 // contentType: HTTP Content-Type
