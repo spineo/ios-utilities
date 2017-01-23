@@ -9,11 +9,14 @@
 
 @implementation ColorUtils
 
+#define DEF_LIGHT_TEXT_COLOR   [UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // COLOR return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// getPixelColorAtLocation
+//
 + (UIColor *)getPixelColorAtLocation:(CGPoint)point image:(UIImage *)cgiImage {
     UIColor* color = nil;
     CGImageRef inImage = cgiImage.CGImage;
@@ -44,6 +47,8 @@
     return color;
 }
 
+// createARGBBitmapContextFromImage
+//
 + (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage {
     CGContextRef    context = NULL;
     CGColorSpaceRef colorSpace;
@@ -87,6 +92,8 @@
     return context;
 }
 
+// colorFromHexString
+//
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];
@@ -95,10 +102,29 @@
     return [UIColor colorWithRed:((rgbValue & 0xFF0000) >> 16)/255.0 green:((rgbValue & 0xFF00) >> 8)/255.0 blue:(rgbValue & 0xFF)/255.0 alpha:1.0];
 }
 
+// setBestColorContrast - Method assumes an arbitrary color map (customize as needed)
+//
++ (UIColor *)setBestColorContrast:(NSString *)colorName {
+    // Dark Text Color
+    //
+    UIColor *textColor = [UIColor blackColor];
+    if ([colorName isEqualToString:@"Black"] || [colorName isEqualToString:@"Blue"] ||
+        [colorName isEqualToString:@"Brown"] || [colorName isEqualToString:@"Blue Violet"]) {
+        
+        // Light Text Color
+        //
+        textColor = [UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
+    }
+    
+    return textColor;
+}
+
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // IMAGE return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// imageWithColor
+//
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height {
     CGRect rect = CGRectMake(0.0, 0.0, width, height);
     UIGraphicsBeginImageContext(rect.size);
@@ -115,6 +141,8 @@
     return image;
 }
 
+// resizeImage
+//
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
     
@@ -129,6 +157,8 @@
     return newImage;
 }
 
+// renderPaint
+//
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
     CGSize size = CGSizeMake(width, height);
     
@@ -137,6 +167,8 @@
     return resizedImage;
 }
 
+// drawTapAreaLabel
+//
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count {
     UIImage *retImage = image;
     
@@ -161,6 +193,8 @@
     return newImage;
 }
 
+// drawLabel
+//
 + (UIImage*)drawLabel:(UIImage*)image label:(NSString *)label {
     UIImage *retImage = image;
 
@@ -183,6 +217,8 @@
     return newImage;
 }
 
+// cropImage
+//
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect {
     rect = CGRectMake(rect.origin.x    * image.scale,
                       rect.origin.y    * image.scale,
@@ -200,21 +236,11 @@
     return croppedImage;
 }
 
-+ (UIColor *)setBestColorContrast:(NSString *)colorName {
-    // Dark Text Color
-    //
-    UIColor *textColor = [UIColor blackColor];
-    if ([colorName isEqualToString:@"Black"] || [colorName isEqualToString:@"Blue"] ||
-        [colorName isEqualToString:@"Brown"] || [colorName isEqualToString:@"Blue Violet"]) {
-        
-        // Light Text Color
-        //
-        textColor = [UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
-    }
-    
-    return textColor;
-}
+// setViewGlaze
+//
 
+// setNavBarGlaze
+//
 + (void)setNavBarGlaze:(UINavigationBar *)navigationBar {
     CGRect bounds = navigationBar.bounds;
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
@@ -225,6 +251,8 @@
     [navigationBar sendSubviewToBack:visualEffectView];
 }
 
+// setToolbarGlaze
+//
 + (void)setToolbarGlaze:(UIToolbar *)toolbar {
     CGRect bounds = toolbar.bounds;
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
@@ -235,6 +263,8 @@
     [toolbar sendSubviewToBack:visualEffectView];
 }
 
+// setViewGlaze
+//
 + (void)setViewGlaze:(UIView *)view {
     CGRect bounds = view.bounds;
     UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
@@ -245,6 +275,8 @@
     [view sendSubviewToBack:visualEffectView];
 }
 
+// setBackgroundImage
+//
 + (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view {
     UIGraphicsBeginImageContext(view.frame.size);
     [[UIImage imageNamed:imageName] drawInRect:view.bounds];
