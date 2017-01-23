@@ -169,7 +169,7 @@
 
 // drawTapAreaLabel
 //
-+ (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count {
++ (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count attrs:(NSDictionary *)attrs inset:(CGFloat)inset {
     UIImage *retImage = image;
     
     NSString *countStr = [[NSString alloc] initWithFormat:@"%i", count];
@@ -179,37 +179,12 @@
     [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
     CGRect rect = CGRectMake(1.0, 1.0, image.size.width, image.size.height);
     
-    // Light Text Color
-    // Tap Area Font
-    // Dark BG Color
+    // Default attrs are Light Text Color, Tap Area Font, Dark BG Color
     //
-    NSDictionary *attr = @{NSForegroundColorAttributeName:[UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSFontAttributeName:[UIFont systemFontOfSize:10], NSBackgroundColorAttributeName:[UIColor blackColor]};
-    
-    [countStr drawInRect:CGRectInset(rect, 2.0, 2.0) withAttributes:attr];
-    
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
-}
+    if (attrs == nil)
+        attrs = @{NSForegroundColorAttributeName:[UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSFontAttributeName:[UIFont systemFontOfSize:10], NSBackgroundColorAttributeName:[UIColor blackColor]};
 
-// drawLabel
-//
-+ (UIImage*)drawLabel:(UIImage*)image label:(NSString *)label {
-    UIImage *retImage = image;
-
-    UIGraphicsBeginImageContext(image.size);
-    
-    [retImage drawInRect:CGRectMake(0.0, 0.0, image.size.width, image.size.height)];
-    CGRect rect = CGRectMake(1.0, 1.0, image.size.width, image.size.height);
-    
-    // Light Text Color
-    // Large Tap Area Font
-    // Dark BG Color
-    //
-    NSDictionary *attr = @{NSForegroundColorAttributeName:[UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0], NSFontAttributeName:[UIFont systemFontOfSize:12], NSBackgroundColorAttributeName:[UIColor blackColor]};
-    
-    [label drawInRect:CGRectInset(rect, 2.0, 2.0) withAttributes:attr];
+    [countStr drawInRect:CGRectInset(rect, inset, inset) withAttributes:attrs];
     
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
@@ -238,6 +213,17 @@
 
 // setViewGlaze
 //
+// setViewGlaze
+//
++ (void)setViewGlaze:(UIView *)view {
+    CGRect bounds = view.bounds;
+    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+    visualEffectView.frame = bounds;
+    visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [view addSubview:visualEffectView];
+    view.backgroundColor = [UIColor clearColor];
+    [view sendSubviewToBack:visualEffectView];
+}
 
 // setNavBarGlaze
 //
@@ -265,15 +251,15 @@
 
 // setViewGlaze
 //
-+ (void)setViewGlaze:(UIView *)view {
-    CGRect bounds = view.bounds;
-    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
-    visualEffectView.frame = bounds;
-    visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [view addSubview:visualEffectView];
-    view.backgroundColor = [UIColor clearColor];
-    [view sendSubviewToBack:visualEffectView];
-}
+//+ (void)setViewGlaze:(UIView *)view {
+//    CGRect bounds = view.bounds;
+//    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
+//    visualEffectView.frame = bounds;
+//    visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    [view addSubview:visualEffectView];
+//    view.backgroundColor = [UIColor clearColor];
+//    [view sendSubviewToBack:visualEffectView];
+//}
 
 // setBackgroundImage
 //

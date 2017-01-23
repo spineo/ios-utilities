@@ -14,16 +14,17 @@
 + (UIColor*)getPixelColorAtLocation:(CGPoint)point image:(UIImage *)cgiImage;
 + (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
++ (UIColor *)setBestColorContrast:(NSString *)colorName;
+
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height;
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
-+ (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count;
-+ (UIImage*)drawLabel:(UIImage*)image label:(NSString *)label;
++ (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count attrs:(NSDictionary *)attrs inset:(CGFloat)inset;
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect;
-+ (UIColor *)setBestColorContrast:(NSString *)colorName;
+
++ (void)setViewGlaze:(UIView *)view;
 + (void)setNavBarGlaze:(UINavigationBar *)navigationBar;
 + (void)setToolbarGlaze:(UIToolbar *)toolbar;
-+ (void)setViewGlaze:(UIView *)view;
 + (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view;
 
 @end
