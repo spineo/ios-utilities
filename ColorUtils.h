@@ -22,9 +22,7 @@
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count attrs:(NSDictionary *)attrs inset:(CGFloat)inset;
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect;
 
-+ (void)setViewGlaze:(UIView *)view;
-+ (void)setNavBarGlaze:(UINavigationBar *)navigationBar;
-+ (void)setToolbarGlaze:(UIToolbar *)toolbar;
++ (void)setGlaze:(id)view;
 + (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view;
 
 @end

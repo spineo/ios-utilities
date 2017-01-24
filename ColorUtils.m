@@ -9,8 +9,6 @@
 
 @implementation ColorUtils
 
-#define DEF_LIGHT_TEXT_COLOR   [UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0]
-
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // COLOR return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -211,8 +209,21 @@
     return croppedImage;
 }
 
-// setViewGlaze
+// setGlaze
 //
++ (void)setGlaze:(id)view {
+    if ([view isMemberOfClass:[UIView class]]) {
+        [self setViewGlaze:(UIView *)view];
+        
+    } else if ([view isMemberOfClass:[UINavigationBar class]]) {
+        [self setNavBarGlaze:(UINavigationBar *)view];
+        
+    } else if ([view isMemberOfClass:[UIToolbar class]]) {
+        [self setToolbarGlaze:(UIToolbar *)view];
+    }
+
+}
+
 // setViewGlaze
 //
 + (void)setViewGlaze:(UIView *)view {
@@ -248,18 +259,6 @@
     toolbar.backgroundColor = [UIColor clearColor];
     [toolbar sendSubviewToBack:visualEffectView];
 }
-
-// setViewGlaze
-//
-//+ (void)setViewGlaze:(UIView *)view {
-//    CGRect bounds = view.bounds;
-//    UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleLight]];
-//    visualEffectView.frame = bounds;
-//    visualEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//    [view addSubview:visualEffectView];
-//    view.backgroundColor = [UIColor clearColor];
-//    [view sendSubviewToBack:visualEffectView];
-//}
 
 // setBackgroundImage
 //
