@@ -13,6 +13,8 @@
 
 + (UIColor*)getPixelColorAtLocation:(CGPoint)point image:(UIImage *)cgiImage;
 + (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage;
+
++ (NSString *)colorCategoryFromHue:(int)degHue red:(int)red green:(int)green blue:(int)blue;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 + (UIColor *)setBestColorContrast:(NSString *)colorName;
 

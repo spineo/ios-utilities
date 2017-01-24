@@ -90,6 +90,111 @@
     return context;
 }
 
+// colorCategoryFromHue
+//
++ (NSString *)colorCategoryFromHue:(int)degHue red:(int)red green:(int)green blue:(int)blue {
+    
+    // Aproximate
+    //
+    int black_threshold = 45;
+    int white_threshold = 210;
+    
+    NSString *colorCategory;
+    
+    // Black/Off-Black
+    //
+    if ((red <= black_threshold) && (green <= black_threshold) && (blue <= black_threshold)) {
+        colorCategory = @"Black/Dark";
+        
+        // White/Off-White
+        //
+    } else if ((red >= white_threshold) && (green >= white_threshold) && (blue >= white_threshold)) {
+        colorCategory = @"White/Off-White";
+        
+        // Red
+        //
+    } else if ((degHue >= 355) || (degHue <= 10)) {
+        colorCategory = @"Red";
+        
+        // Red-Orange
+        //
+    } else if ((degHue >= 11) && (degHue <= 20)) {
+        colorCategory = @"Red-Orange";
+        
+        // Orange & Brown
+        //
+    } else if ((degHue >= 21) && (degHue <= 40)) {
+        colorCategory = @"Orange & Brown";
+        
+        // Orange-Yellow
+        //
+    } else if ((degHue >= 41) && (degHue <= 50)) {
+        colorCategory = @"Orange-Yellow";
+        
+        // Yellow
+        //
+    } else if ((degHue >= 51) && (degHue <= 60)) {
+        colorCategory = @"Yellow";
+        
+        // Yellow-Green
+        //
+    } else if ((degHue >= 61) && (degHue <= 80)) {
+        colorCategory = @"Yellow-Green";
+        
+        // Green
+        //
+    } else if ((degHue >= 81) && (degHue <= 140)) {
+        colorCategory = @"Green";
+        
+        // Green-Cyan
+        //
+    } else if ((degHue >= 141) && (degHue <= 169)) {
+        colorCategory = @"Green-Cyan";
+        
+        // Cyan
+        //
+    } else if ((degHue >= 170) && (degHue <= 200)) {
+        colorCategory = @"Cyan";
+        
+        // Cyan-Blue
+        //
+    } else if ((degHue >= 201) && (degHue <= 220)) {
+        colorCategory = @"Cyan-Blue";
+        
+        // Blue
+        //
+    } else if ((degHue >= 221) && (degHue <= 240)) {
+        colorCategory = @"Blue";
+        
+        // Blue-Magenta
+        //
+    } else if ((degHue >= 241) && (degHue <= 280)) {
+        colorCategory = @"Blue-Magenta";
+        
+        // Magenta
+        //
+    } else if ((degHue >= 281) && (degHue <= 320)) {
+        colorCategory = @"Magenta";
+        
+        // Magenta-Pink
+        //
+    } else if ((degHue >= 321) && (degHue <= 330)) {
+        colorCategory = @"Magenta-Pink";
+        
+        // Pink
+        //
+    } else if ((degHue >= 331) && (degHue <= 345)) {
+        colorCategory = @"Pink";
+        
+        // Pink-Red
+        //
+    } else if ((degHue >= 346) && (degHue <= 355)) {
+        colorCategory = @"Pink-Red";
+    }
+    
+    return colorCategory;
+}
+
 // colorFromHexString
 //
 + (UIColor *)colorFromHexString:(NSString *)hexString {
@@ -221,7 +326,6 @@
     } else if ([view isMemberOfClass:[UIToolbar class]]) {
         [self setToolbarGlaze:(UIToolbar *)view];
     }
-
 }
 
 // setViewGlaze
