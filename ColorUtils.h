@@ -12,12 +12,11 @@
 @interface ColorUtils : NSObject
 
 + (UIColor*)getPixelColorAtLocation:(CGPoint)point image:(UIImage *)cgiImage;
-+ (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage;
 
++ (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage;
 + (NSString *)colorCategoryFromHue:(int)degHue red:(int)red green:(int)green blue:(int)blue;
 + (UIColor *)colorFromHexString:(NSString *)hexString;
-+ (UIColor *)setBestColorContrast:(NSString *)colorName;
-
++ (UIColor *)setBestColorContrast:(NSString *)colorName darkColor:(UIColor *)darkColor lightColor:(UIColor *)lightColor;
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height;
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height;

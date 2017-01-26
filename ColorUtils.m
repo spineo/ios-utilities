@@ -208,19 +208,14 @@
 
 // setBestColorContrast - Method assumes an arbitrary color map (customize as needed)
 //
-+ (UIColor *)setBestColorContrast:(NSString *)colorName {
-    // Dark Text Color
-    //
-    UIColor *textColor = [UIColor blackColor];
++ (UIColor *)setBestColorContrast:(NSString *)colorName darkColor:(UIColor *)darkColor lightColor:(UIColor *)lightColor {
     if ([colorName isEqualToString:@"Black"] || [colorName isEqualToString:@"Blue"] ||
         [colorName isEqualToString:@"Brown"] || [colorName isEqualToString:@"Blue Violet"]) {
         
-        // Light Text Color
-        //
-        textColor = [UIColor colorWithRed:235.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
+        return lightColor;
     }
     
-    return textColor;
+    return darkColor;
 }
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
