@@ -227,7 +227,7 @@
 // IMAGE return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// imageWithColor
+// imageWithColor - Return color (i.e., RGB) filled shape
 //
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height {
     CGRect rect = CGRectMake(0.0, 0.0, width, height);
@@ -245,7 +245,7 @@
     return image;
 }
 
-// resizeImage
+// resizeImage - Return resized image
 //
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size {
     UIGraphicsBeginImageContext(size);
@@ -261,7 +261,7 @@
     return newImage;
 }
 
-// renderPaint
+// renderPaint - Return image thumbnail
 //
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height {
     CGSize size = CGSizeMake(width, height);
@@ -271,7 +271,7 @@
     return resizedImage;
 }
 
-// drawTapAreaLabel
+// drawTapAreaLabel - Draw numeric label inset image
 //
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count attrs:(NSDictionary *)attrs inset:(CGFloat)inset {
     UIImage *retImage = image;
@@ -296,7 +296,7 @@
     return newImage;
 }
 
-// cropImage
+// cropImage - Return cropped image
 //
 + (UIImage *)cropImage:(UIImage*)image frame:(CGRect)rect {
     rect = CGRectMake(rect.origin.x    * image.scale,
@@ -314,8 +314,11 @@
     
     return croppedImage;
 }
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// View Glaze and Background Image methods
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// setGlaze
+// setGlaze - Choose which view method to invoke
 //
 + (void)setGlaze:(id)view {
     if ([view isMemberOfClass:[UIView class]]) {
@@ -329,7 +332,7 @@
     }
 }
 
-// setViewGlaze
+// setViewGlaze - UIView glaze
 //
 + (void)setViewGlaze:(UIView *)view {
     CGRect bounds = view.bounds;
@@ -341,7 +344,7 @@
     [view sendSubviewToBack:visualEffectView];
 }
 
-// setNavBarGlaze
+// setNavBarGlaze - UINavigationBar glaze
 //
 + (void)setNavBarGlaze:(UINavigationBar *)navigationBar {
     CGRect bounds = navigationBar.bounds;
@@ -353,7 +356,7 @@
     [navigationBar sendSubviewToBack:visualEffectView];
 }
 
-// setToolbarGlaze
+// setToolbarGlaze - UIToolbar glaze
 //
 + (void)setToolbarGlaze:(UIToolbar *)toolbar {
     CGRect bounds = toolbar.bounds;
@@ -365,7 +368,7 @@
     [toolbar sendSubviewToBack:visualEffectView];
 }
 
-// setBackgroundImage
+// setBackgroundImage - Associate specified background image with UIView
 //
 + (void)setBackgroundImage:(NSString *)imageName view:(UIView *)view {
     UIGraphicsBeginImageContext(view.frame.size);
