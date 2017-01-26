@@ -10,6 +10,8 @@
 
 @implementation BarButtonUtils
 
+// setButtonImage - Given an image name set the image for button associated with refTag
+//
 + (NSArray *)setButtonImage:(NSArray *)toolbarItems refTag:(int)tag imageName:(NSString *)name {
 
     int buttonCount = (int)toolbarItems.count;
@@ -31,6 +33,8 @@
     return toolbarItems;
 }
 
+// setButtonName - Set the name for button associated with refTag
+//
 + (NSArray *)setButtonName:(NSArray *)toolbarItems refTag:(int)tag buttonName:(NSString *)label {
     
     int buttonCount = (int)toolbarItems.count;
@@ -48,7 +52,7 @@
     return toolbarItems;
 }
 
-+ (void)buttonEnabled:(NSArray *)toolbarItems refTag:(int)refTag isEnabled:(BOOL)isEnabled {
++ (void)setButtonEnabled:(NSArray *)toolbarItems refTag:(int)refTag isEnabled:(BOOL)isEnabled {
 
     int buttonCount = (int)toolbarItems.count;
 
@@ -62,7 +66,7 @@
     }
 }
 
-+ (void)buttonShow:(NSArray *)toolbarItems refTag:(int)refTag {
++ (void)setButtonShow:(NSArray *)toolbarItems refTag:(int)refTag {
     
     int buttonCount = (int)toolbarItems.count;
     
@@ -77,7 +81,7 @@
     }
 }
 
-+ (void)buttonHide:(NSArray *)toolbarItems refTag:(int)refTag {
++ (void)setButtonHide:(NSArray *)toolbarItems refTag:(int)refTag {
     
     int buttonCount = (int)toolbarItems.count;
     
@@ -92,7 +96,7 @@
     }
 }
 
-+ (void)buttonSetTitle:(NSArray *)toolbarItems refTag:(int)refTag title:(NSString *)title {
++ (void)setButtonTitle:(NSArray *)toolbarItems refTag:(int)refTag title:(NSString *)title {
     
     int buttonCount = (int)toolbarItems.count;
     
@@ -106,7 +110,7 @@
     }
 }
 
-+ (void)buttonSetWidth:(NSArray *)toolbarItems refTag:(int)refTag width:(CGFloat)width {
++ (void)setButtonWidth:(NSArray *)toolbarItems refTag:(int)refTag width:(CGFloat)width {
     
     int buttonCount = (int)toolbarItems.count;
     

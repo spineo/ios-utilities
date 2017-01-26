@@ -15,14 +15,14 @@
 
 + (NSArray *)setButtonName:(NSArray *)toolbarItems refTag:(int)tag buttonName:(NSString *)label;
 
-+ (void)buttonEnabled:(NSArray *)toolbarItems refTag:(int)refTag isEnabled:(BOOL)isEnabled;
++ (void)setButtonEnabled:(NSArray *)toolbarItems refTag:(int)refTag isEnabled:(BOOL)isEnabled;
 
-+ (void)buttonShow:(NSArray *)toolbarItems refTag:(int)refTag;
++ (void)setButtonShow:(NSArray *)toolbarItems refTag:(int)refTag;
 
-+ (void)buttonHide:(NSArray *)toolbarItems refTag:(int)refTag;
++ (void)setButtonHide:(NSArray *)toolbarItems refTag:(int)refTag;
 
-+ (void)buttonSetTitle:(NSArray *)toolbarItems refTag:(int)refTag title:(NSString *)title;
++ (void)setButtonTitle:(NSArray *)toolbarItems refTag:(int)refTag title:(NSString *)title;
 
-+ (void)buttonSetWidth:(NSArray *)toolbarItems refTag:(int)refTag width:(CGFloat)width;
++ (void)setButtonWidth:(NSArray *)toolbarItems refTag:(int)refTag width:(CGFloat)width;
 
 @end
