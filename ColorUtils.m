@@ -13,7 +13,7 @@
 // COLOR return methods
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// getPixelColorAtLocation
+// getPixelColorAtLocation - Return the UIColor for the Pixel at image location
 //
 + (UIColor *)getPixelColorAtLocation:(CGPoint)point image:(UIImage *)cgiImage {
     UIColor* color = nil;
@@ -45,7 +45,7 @@
     return color;
 }
 
-// createARGBBitmapContextFromImage
+// createARGBBitmapContextFromImage - Get pixel for an image
 //
 + (CGContextRef)createARGBBitmapContextFromImage:(CGImageRef)inImage {
     CGContextRef    context = NULL;
@@ -90,11 +90,12 @@
     return context;
 }
 
-// colorCategoryFromHue
+// colorCategoryFromHue - Return the subjective color category that falls within the black/white threshold
+// This is just one subjective definition of color category
 //
 + (NSString *)colorCategoryFromHue:(int)degHue red:(int)red green:(int)green blue:(int)blue {
     
-    // Aproximate
+    // Arbitrary (these values can be redefined)
     //
     int black_threshold = 45;
     int white_threshold = 210;
@@ -195,7 +196,7 @@
     return colorCategory;
 }
 
-// colorFromHexString
+// colorFromHexString - Return the UIColor associated with the hex value
 //
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
