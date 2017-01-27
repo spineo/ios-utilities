@@ -5,123 +5,81 @@
 //  Created by Stuart Pineo on 5/19/15.
 //  Copyright (c) 2015 Stuart Pineo. All rights reserved.
 //
-
 #import "BarButtonUtils.h"
 
 @implementation BarButtonUtils
 
 // setButtonImage - Given an image name set the image for button associated with refTag
 //
-+ (NSArray *)setButtonImage:(NSArray *)toolbarItems refTag:(int)tag imageName:(NSString *)name {
-
-    int buttonCount = (int)toolbarItems.count;
-    
-    UIImage *colorRenderingImage;
-    
-    for (int i=0; i<buttonCount; i++) {
-        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:i];
-        int refTag = (int)refButton.tag;
-        
-        if (refTag == tag) {
-            colorRenderingImage = [UIImage imageNamed:name];
-
-            [[toolbarItems objectAtIndex:i] setImage:colorRenderingImage];
-            
-            break;
-        }
++ (void)setButtonImage:(NSArray *)toolbarItems refTag:(int)tag imageName:(NSString *)name {
+    int index = [self getButtonIndex:toolbarItems refTag:tag];
+    if (index >= 0) {
+        UIImage *colorRenderingImage = [UIImage imageNamed:name];
+        [[toolbarItems objectAtIndex:index] setImage:colorRenderingImage];
     }
-    return toolbarItems;
 }
 
 // setButtonName - Set the name for button associated with refTag
 //
-+ (NSArray *)setButtonName:(NSArray *)toolbarItems refTag:(int)tag buttonName:(NSString *)label {
-    
-    int buttonCount = (int)toolbarItems.count;
-    
-    for (int i=0; i<buttonCount; i++) {
-        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:i];
-        int refTag = (int)refButton.tag;
-        
-        if (refTag == tag) {
-            [[toolbarItems objectAtIndex:i] setTitle:label];
-            
-            break;
-        }
-    }
-    return toolbarItems;
-}
-
-+ (void)setButtonEnabled:(NSArray *)toolbarItems refTag:(int)refTag isEnabled:(BOOL)isEnabled {
-
-    int buttonCount = (int)toolbarItems.count;
-
-    for (int i=0; i<buttonCount; i++) {
-        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:i];
-        int buttonTag = (int)refButton.tag;
-        
-        if (refTag == buttonTag) {
-            [ [toolbarItems objectAtIndex:i ] setEnabled:isEnabled ];
-        }
++ (void)setButtonTitle:(NSArray *)toolbarItems refTag:(int)tag title:(NSString *)title {
+    int index = [self getButtonIndex:toolbarItems refTag:tag];
+    if (index >= 0) {
+        [[toolbarItems objectAtIndex:index] setTitle:title];
     }
 }
 
-+ (void)setButtonShow:(NSArray *)toolbarItems refTag:(int)refTag {
-    
-    int buttonCount = (int)toolbarItems.count;
-    
-    for (int i=0; i<buttonCount; i++) {
-        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:i];
-        int buttonTag = (int)refButton.tag;
-        
-        if (refTag == buttonTag) {
-            [[toolbarItems objectAtIndex:i] setEnabled:TRUE ];
-            [[toolbarItems objectAtIndex:i] setTintColor:nil];
-        }
+// setButtonEnabled - Set the button state (enabled or disabled)
+//
++ (void)setButtonEnabled:(NSArray *)toolbarItems refTag:(int)tag isEnabled:(BOOL)isEnabled {
+    int index = [self getButtonIndex:toolbarItems refTag:tag];
+    if (index >= 0) {
+        [[toolbarItems objectAtIndex:index] setEnabled:isEnabled];
     }
 }
 
-+ (void)setButtonHide:(NSArray *)toolbarItems refTag:(int)refTag {
-    
-    int buttonCount = (int)toolbarItems.count;
-    
-    for (int i=0; i<buttonCount; i++) {
-        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:i];
-        int buttonTag = (int)refButton.tag;
-        
-        if (refTag == buttonTag) {
-            [[toolbarItems objectAtIndex:i] setEnabled:FALSE];
-            [[toolbarItems objectAtIndex:i] setTintColor:[UIColor clearColor]];
-        }
+// setButtonShow - Make the button visible
+//
++ (void)setButtonShow:(NSArray *)toolbarItems refTag:(int)tag {
+    int index = [self getButtonIndex:toolbarItems refTag:tag];
+    if (index >= 0) {
+        [[toolbarItems objectAtIndex:index] setEnabled:TRUE];
+        [[toolbarItems objectAtIndex:index] setTintColor:nil];
     }
 }
 
-+ (void)setButtonTitle:(NSArray *)toolbarItems refTag:(int)refTag title:(NSString *)title {
-    
-    int buttonCount = (int)toolbarItems.count;
-    
-    for (int i=0; i<buttonCount; i++) {
-        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:i];
-        int buttonTag = (int)refButton.tag;
-        
-        if (refTag == buttonTag) {
-            [[toolbarItems objectAtIndex:i] setTitle:title];
-        }
+// setButtonHide - Hide the button
+//
++ (void)setButtonHide:(NSArray *)toolbarItems refTag:(int)tag {
+    int index = [self getButtonIndex:toolbarItems refTag:tag];
+    if (index >= 0) {
+        [[toolbarItems objectAtIndex:index] setEnabled:FALSE];
+        [[toolbarItems objectAtIndex:index] setTintColor:[UIColor clearColor]];
     }
 }
 
-+ (void)setButtonWidth:(NSArray *)toolbarItems refTag:(int)refTag width:(CGFloat)width {
+// setButtonWidth - Set the button width (usually works with show/hide)
+//
++ (void)setButtonWidth:(NSArray *)toolbarItems refTag:(int)tag width:(CGFloat)width {
+    int index = [self getButtonIndex:toolbarItems refTag:tag];
+    if (index >= 0) {
+        [[toolbarItems objectAtIndex:index] setWidth:width];
+    }
+}
+
+// getButtonIndex - return toolbar index matching tag or -1 if tag not found
+//
++ (int)getButtonIndex:(NSArray *)toolbarItems refTag:(int)tag {
+    int buttonCount = (int)[toolbarItems count];
     
-    int buttonCount = (int)toolbarItems.count;
-    
-    for (int i=0; i<buttonCount; i++) {
-        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:i];
-        int buttonTag = (int)refButton.tag;
+    for (int index=0; index<buttonCount; index++) {
+        UIBarButtonItem *refButton = [toolbarItems objectAtIndex:index];
+        int buttonTag = (int)[refButton tag];
         
-        if (refTag == buttonTag) {
-            [[toolbarItems objectAtIndex:i] setWidth:width ];
+        if (tag == buttonTag) {
+            return index;
         }
     }
+    return -1;
 }
 
 @end

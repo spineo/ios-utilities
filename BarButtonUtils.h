@@ -11,18 +11,16 @@
 
 @interface BarButtonUtils : NSObject
 
-+ (NSArray *)setButtonImage:(NSArray *)toolbarItems refTag:(int)tag imageName:(NSString *)name;
++ (void)setButtonTitle:(NSArray *)toolbarItems refTag:(int)tag title:(NSString *)title;
 
-+ (NSArray *)setButtonName:(NSArray *)toolbarItems refTag:(int)tag buttonName:(NSString *)label;
++ (void)setButtonImage:(NSArray *)toolbarItems refTag:(int)tag imageName:(NSString *)name;
 
-+ (void)setButtonEnabled:(NSArray *)toolbarItems refTag:(int)refTag isEnabled:(BOOL)isEnabled;
++ (void)setButtonEnabled:(NSArray *)toolbarItems refTag:(int)tag isEnabled:(BOOL)isEnabled;
 
-+ (void)setButtonShow:(NSArray *)toolbarItems refTag:(int)refTag;
++ (void)setButtonShow:(NSArray *)toolbarItems refTag:(int)tag;
 
-+ (void)setButtonHide:(NSArray *)toolbarItems refTag:(int)refTag;
++ (void)setButtonHide:(NSArray *)toolbarItems refTag:(int)tag;
 
-+ (void)setButtonTitle:(NSArray *)toolbarItems refTag:(int)refTag title:(NSString *)title;
-
-+ (void)setButtonWidth:(NSArray *)toolbarItems refTag:(int)refTag width:(CGFloat)width;
++ (void)setButtonWidth:(NSArray *)toolbarItems refTag:(int)tag width:(CGFloat)width;
 
 @end
