@@ -17,8 +17,6 @@
 
 + (NSString *)removeSpaces:(NSString *)string;
 
-+ (NSString *)getCurrDateString;
-
-+ (NSString *)getCurrDateIdentifier;
++ (NSString *)getCurrDateString:(NSString *)dateFormat;
 
 @end

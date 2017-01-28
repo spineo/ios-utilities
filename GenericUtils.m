@@ -9,38 +9,36 @@
 
 @implementation GenericUtils
 
+// trimStrings - Remove whitespace characters from both ends of each string of an array of strings
+//
 + (NSMutableArray *)trimStrings:(NSArray *)stringList {
     NSMutableArray *trimmedStrings = [[NSMutableArray alloc] init];
     for (NSString *string in stringList) {
-        NSString *trimmedString = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        [trimmedStrings addObject:trimmedString];
+        [trimmedStrings addObject:[self trimString:string]];
     }
     return trimmedStrings;
 }
 
+// trimString - Remove whitespace characters from both ends of a single string
+//
 + (NSString *)trimString:(NSString *)string {
-    NSString *trimmedString = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-    
-    return trimmedString;
+    return [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
+// removeSpaces - Remove all spaces within a string
+//
 + (NSString *)removeSpaces:(NSString *)string {
-    NSString *noSpacesString = [string stringByReplacingOccurrencesOfString:@" " withString:@""];
-
-    return noSpacesString;
+    return [string stringByReplacingOccurrencesOfString:@" " withString:@""];
 }
 
-+ (NSString *)getCurrDateString {
+// getCurrDateString - Return the current date string in a specified format (i.e., @"YYYY-MM-dd HH:mm:ss")
+//
++ (NSString *)getCurrDateString:(NSString *)dateFormat {
     NSDate *currentDate = [NSDate date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
-    return [dateFormatter stringFromDate:currentDate];
-}
+    
+    [dateFormatter setDateFormat:dateFormat];
 
-+ (NSString *)getCurrDateIdentifier {
-    NSDate *currentDate = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"YYYYMMddHHmmss"];
     return [dateFormatter stringFromDate:currentDate];
 }
 
