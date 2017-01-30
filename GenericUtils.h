@@ -19,4 +19,6 @@
 
 + (NSString *)getCurrDateString:(NSString *)dateFormat;
 
++ (float)getRandomVal;
+
 @end
