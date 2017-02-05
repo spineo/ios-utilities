@@ -36,10 +36,11 @@
 + (BOOL)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName authToken:(NSString *)authToken {
     
     __block BOOL stat = FALSE;
-    
-    // Need to extends URL string encoding (use a generic method)
+
+    // URL Encoding
     //
-    urlStr = [urlStr stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
+    NSCharacterSet *allowedCharacters = [NSCharacterSet URLFragmentAllowedCharacterSet];
+    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
     
     NSURL *url = [NSURL URLWithString:urlStr];
     
