@@ -1,10 +1,11 @@
 # ios-utilities
-IOS Utilities (Objective C) - This repo contains Objective-C static and generic utilities developed for Apps (currently in a Private repo)
 
-The categories include:
+IOS Utilities (Objective C) - This repo contains Objective-C static and generic utilities supporting App development
 
-FileUtils - Utilities used for file operations
+Categories include:
 
-HTTPUtils - Utilities used for HTTP and Network Connectivity operations
-
-ColorUtils - Utilities to manipulate Colors and Images (in progress - still needs cleanup, add a few more)
+* FileUtils - Wrappers to file operations
+* HTTPUtils - Network connection and HTTP get with Basic authentication
+* ColorUtils - Manipulate Colors and Images
+* BarButtonUtils - Modify Toolbar button properites
+* GenericUtils - Multi-purpose generic utilities
