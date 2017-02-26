@@ -26,6 +26,40 @@
     }
 }
 
+// urlIsReachable - Check if URL is reachable
+// Parameter:
+// urlStr     : Target URL
+//
++ (BOOL)urlIsReachable:(NSString *)urlStr {
+    __block BOOL stat = FALSE;
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    NSMutableURLRequest *request = [self HTTPInit:urlStr];
+    
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    
+    NSURLSessionTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        
+        if (data) {
+            NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+                
+            if (httpResponse.statusCode == 200) {
+                stat = TRUE;
+            } else {
+                NSLog(@"Check failed");
+            }
+        }
+        dispatch_semaphore_signal(semaphore);
+    }];
+    
+    [task resume];
+    
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+    return stat;
+}
+
 // HTTPGet - HTTP GET wrapper that optionally enables Basic Authorization
 // Parameters:
 // urlStr     : Target URL
@@ -34,20 +68,11 @@
 // authToken  : Optional authorization token (i.e., colon delimited user and password)
 //
 + (BOOL)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName authToken:(NSString *)authToken {
-    
     __block BOOL stat = FALSE;
-
-    // URL Encoding
-    //
-    NSCharacterSet *allowedCharacters = [NSCharacterSet URLFragmentAllowedCharacterSet];
-    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
-    
-    NSURL *url = [NSURL URLWithString:urlStr];
     
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
-    
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    NSMutableURLRequest *request = [self HTTPInit:urlStr];
     
     request.HTTPMethod = @"GET";
     [request setValue:[[NSString alloc] initWithFormat:@"%@", contentType] forHTTPHeaderField:@"Content-Type"];
@@ -82,6 +107,19 @@
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
     
     return stat;
+}
+
+// HTTPInit - Generic private initialization method
+//
++ (NSMutableURLRequest *)HTTPInit:(NSString *)urlStr {
+    // URL Encoding
+    //
+    NSCharacterSet *allowedCharacters = [NSCharacterSet URLFragmentAllowedCharacterSet];
+    urlStr = [urlStr stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
+    
+    NSURL *url = [NSURL URLWithString:urlStr];
+    
+    return [[NSMutableURLRequest alloc] initWithURL:url];
 }
 
 @end
