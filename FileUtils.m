@@ -83,6 +83,21 @@ NSTimeInterval const ASYNC_THREAD_SLEEP = .5;
     return [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 }
 
++ (int)fileLineCount:(NSString *)fileName fileType:(NSString *)fileType {
+    // Read the data text files
+    //
+    NSString* fileRoot = [[NSBundle mainBundle] pathForResource:fileName ofType:fileType];
+    NSString* fileContents = [NSString stringWithContentsOfFile:fileRoot encoding:NSUTF8StringEncoding error:nil];
+    
+    // Separate by new line
+    //
+    NSArray* allLines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    
+    return (int)[allLines count];
+}
+    
+    
+
 // md5Hash - Compute and return the md5 checksum value associated with a file
 // Parameters:
 // filePath   : File/path of the file for which the md5 checksum value is computed

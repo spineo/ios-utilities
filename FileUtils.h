@@ -15,6 +15,8 @@
 
 + (NSString *)lineFromFile:(NSString *)filePath;
 
++ (int)fileLineCount:(NSString *)fileName fileType:(NSString *)fileType;
+
 + (NSString *)md5Hash:(NSString *)path fileManager:(NSFileManager *)fileManager;
 
 @end
