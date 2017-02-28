@@ -5,6 +5,7 @@
 //  Copyright © 2016 Stuart Pineo. All rights reserved.
 //
 #import "FileUtils.h"
+#import "GenericUtils.h"
 
 @implementation FileUtils
 
@@ -83,6 +84,11 @@ NSTimeInterval const ASYNC_THREAD_SLEEP = .5;
     return [[NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
 }
 
+// fileLineCount - return count of non-empty lines
+// Parameters:
+// fileName - Name of the file
+// fileType - File extension (i.e., txt)
+//
 + (int)fileLineCount:(NSString *)fileName fileType:(NSString *)fileType {
     // Read the data text files
     //
@@ -93,7 +99,18 @@ NSTimeInterval const ASYNC_THREAD_SLEEP = .5;
     //
     NSArray* allLines = [fileContents componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     
-    return (int)[allLines count];
+    int count = 0;
+    for (NSString *line in allLines) {
+        // Strip newlines
+        //
+        NSString *lineContents = [line stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+        
+        if (![lineContents isEqualToString:@""]) {
+            count = count + 1;
+        }
+    }
+    
+    return count;
 }
     
     
