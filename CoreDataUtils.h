@@ -13,6 +13,8 @@
 
 // ManagedObject (requires the 'AppDelegate.h' for the application)
 //
-+ (int)fetchCount:(NSString *)entityName;
+- (CoreDataUtils *)init;
+- (int)fetchCount:(NSString *)entityName;
+- (NSArray *)fetchEntity:(NSString *)entityName;
 
 @end

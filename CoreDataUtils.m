@@ -7,23 +7,50 @@
 //
 #import "CoreDataUtils.h"
 
+@interface CoreDataUtils()
+
+//@property (nonatomic, strong) AppDelegate *appDelegate;
+@property (nonatomic, strong) NSManagedObjectContext *context;
+
+@end
+
 @implementation CoreDataUtils
 
-+ (int)fetchCount:(NSString *)entityName {
-    
+- (CoreDataUtils *)init {
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    self.context = [appDelegate managedObjectContext];
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    return self;
+}
+
+- (int)fetchCount:(NSString *)entityName {
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.context];
     
     NSFetchRequest *fetch = [[NSFetchRequest alloc] init];
     
     [fetch setEntity:entity];
     
     NSError *error      = nil;
-    int count = (int)[context countForFetchRequest:fetch error:&error];
+    int count = (int)[self.context countForFetchRequest:fetch error:&error];
     
     return count;
+}
+
+- (NSArray *)fetchEntity:(NSString *)entityName {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.context];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error = nil;
+    NSArray *results = [self.context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return results;
+    } else {
+        return nil;
+    }
 }
 
 @end
