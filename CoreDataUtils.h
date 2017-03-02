@@ -16,5 +16,6 @@
 - (CoreDataUtils *)init;
 - (int)fetchCount:(NSString *)entityName;
 - (NSArray *)fetchEntity:(NSString *)entityName;
+- (id)queryDictionary:(NSString *)entityName nameValue:(NSString *)nameValue;
 
 @end

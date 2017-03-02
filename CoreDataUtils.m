@@ -37,7 +37,6 @@
 }
 
 - (NSArray *)fetchEntity:(NSString *)entityName {
-    
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.context];
@@ -48,6 +47,24 @@
     
     if ([results count] > 0) {
         return results;
+    } else {
+        return nil;
+    }
+}
+
+- (id)queryDictionary:(NSString *)entityName nameValue:(NSString *)nameValue {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.context];
+    [fetchRequest setEntity:entity];
+    
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"name == %@", nameValue]];
+    
+    NSError *error = nil;
+    NSArray *results = [self.context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return [results objectAtIndex:0];
     } else {
         return nil;
     }
