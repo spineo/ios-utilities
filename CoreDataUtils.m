@@ -52,6 +52,24 @@
     }
 }
 
+- (NSArray *)fetchedEntityHasId:(NSString *)entityName attrName:(NSString *)attrName value:(int)value {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:self.context];
+    [fetchRequest setEntity:entity];
+
+    [fetchRequest setPredicate: [NSPredicate predicateWithFormat:@"%K == %i", attrName, value]];
+    
+    NSError *error = nil;
+    NSArray *results = [self.context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([results count] > 0) {
+        return results;
+    } else {
+        return nil;
+    }
+}
+
 - (id)queryDictionary:(NSString *)entityName nameValue:(NSString *)nameValue {
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     
@@ -65,6 +83,7 @@
     
     if ([results count] > 0) {
         return [results objectAtIndex:0];
+
     } else {
         return nil;
     }
