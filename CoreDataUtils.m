@@ -45,11 +45,7 @@
     NSError *error = nil;
     NSArray *results = [self.context executeFetchRequest:fetchRequest error:&error];
     
-    if ([results count] > 0) {
-        return results;
-    } else {
-        return nil;
-    }
+    return results;
 }
 
 - (NSArray *)fetchedEntityHasId:(NSString *)entityName attrName:(NSString *)attrName value:(int)value {
@@ -63,11 +59,7 @@
     NSError *error = nil;
     NSArray *results = [self.context executeFetchRequest:fetchRequest error:&error];
     
-    if ([results count] > 0) {
-        return results;
-    } else {
-        return nil;
-    }
+    return results;
 }
 
 - (id)queryDictionary:(NSString *)entityName nameValue:(NSString *)nameValue {
