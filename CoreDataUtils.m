@@ -9,7 +9,6 @@
 
 @interface CoreDataUtils()
 
-//@property (nonatomic, strong) AppDelegate *appDelegate;
 @property (nonatomic, strong) NSManagedObjectContext *context;
 
 @end
