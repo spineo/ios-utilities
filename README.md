@@ -9,3 +9,4 @@ Categories include:
 * ColorUtils - Manipulate Colors and Images
 * BarButtonUtils - Modify Toolbar button properites
 * GenericUtils - Multi-purpose generic utilities
+* CoreDataUtils - Generic ManagedObject/Data query utilities
