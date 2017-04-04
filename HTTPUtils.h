@@ -12,5 +12,6 @@
 + (BOOL)networkIsReachable;
 + (BOOL)urlIsReachable:(NSString *)urlStr;
 + (BOOL)HTTPGet:(NSString *)urlStr contentType:(NSString *)contentType fileName:(NSString *)fileName authToken:(NSString *)authToken;
++ (BOOL)openBrowser:(NSString *)site;
 
 @end

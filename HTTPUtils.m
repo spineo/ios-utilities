@@ -122,4 +122,20 @@
     return [[NSMutableURLRequest alloc] initWithURL:url];
 }
 
+// Open Browser (i.e., Safari)
+//
++ (BOOL)openBrowser:(NSString *)site {
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *url = [NSURL URLWithString:site];
+    
+    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [application openURL:url options:@{}
+           completionHandler:^(BOOL success) {
+               NSLog(@"Open %@: %d",site,success);
+           }];
+        return TRUE;
+    }
+    return FALSE;
+}
+
 @end
