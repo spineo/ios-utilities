@@ -11,6 +11,8 @@
 
 @interface BarButtonUtils : NSObject
 
++ (NSArray *)convertToDark3DButton:(NSArray *)toolbarItems refTag:(int)tag;
+
 + (void)setButtonTitle:(NSArray *)toolbarItems refTag:(int)tag title:(NSString *)title;
 
 + (void)setButtonImage:(NSArray *)toolbarItems refTag:(int)tag imageName:(NSString *)name;

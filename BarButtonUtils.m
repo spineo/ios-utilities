@@ -9,6 +9,41 @@
 
 @implementation BarButtonUtils
 
+// Create 3D Button with Dark Cradient
+//
++ (NSArray *)convertToDark3DButton:(NSArray *)toolbarItems refTag:(int)tag {
+    
+    NSArray *modToolbarItems;
+    
+    int index = [self getButtonIndex:toolbarItems refTag:tag];
+    if (index >= 0) {
+        NSMutableArray *mutToolbarItems = [NSMutableArray arrayWithArray:toolbarItems];
+        NSString *title = [[modToolbarItems objectAtIndex:index] title];
+    
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+        [button setFrame:CGRectMake(0.0, 0.0, 40.0, 20.0)];
+        [button setTitle:title forState:UIControlStateNormal];
+        [button setBackgroundColor:[UIColor clearColor]];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        [button.layer setMasksToBounds:YES];
+        [button.layer setCornerRadius:15.0];
+        [button.layer setBorderWidth:1.0];
+        [button.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        
+        CAGradientLayer *gradient = [CAGradientLayer layer];
+        gradient.frame            = button.bounds;
+        gradient.colors           = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor grayColor] CGColor], nil];
+        [button.layer insertSublayer:gradient atIndex:0];
+        
+        [mutToolbarItems replaceObjectAtIndex:index withObject:[[UIBarButtonItem alloc] initWithCustomView:button]];
+        modToolbarItems = [mutToolbarItems copy];
+    }
+    return modToolbarItems;
+}
+
+
 // setButtonImage - Given an image name set the image for button associated with refTag
 //
 + (void)setButtonImage:(NSArray *)toolbarItems refTag:(int)tag imageName:(NSString *)name {
