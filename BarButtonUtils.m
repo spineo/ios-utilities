@@ -11,18 +11,16 @@
 
 // Create 3D Button with Dark Cradient
 //
-+ (NSArray *)convertToDark3DButton:(NSArray *)toolbarItems refTag:(int)tag {
++ (NSArray *)convertToDark3DButton:(NSArray *)toolbarItems title:(NSString *)title width:(CGFloat)width refTag:(int)tag {
     
     NSArray *modToolbarItems;
     
     int index = [self getButtonIndex:toolbarItems refTag:tag];
     if (index >= 0) {
         NSMutableArray *mutToolbarItems = [NSMutableArray arrayWithArray:toolbarItems];
-        NSString *title = [[modToolbarItems objectAtIndex:index] title];
     
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [button setFrame:CGRectMake(0.0, 0.0, 40.0, 20.0)];
+
         [button setTitle:title forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor clearColor]];
         [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -36,8 +34,14 @@
         gradient.frame            = button.bounds;
         gradient.colors           = [NSArray arrayWithObjects:(id)[[UIColor blackColor] CGColor], (id)[[UIColor grayColor] CGColor], nil];
         [button.layer insertSublayer:gradient atIndex:0];
+        [button sizeToFit];
         
-        [mutToolbarItems replaceObjectAtIndex:index withObject:[[UIBarButtonItem alloc] initWithCustomView:button]];
+        [[mutToolbarItems objectAtIndex:index] setCustomView:button];
+        [[mutToolbarItems objectAtIndex:index] setWidth:width];
+        
+        // Need selector
+        //
+
         modToolbarItems = [mutToolbarItems copy];
     }
     return modToolbarItems;
