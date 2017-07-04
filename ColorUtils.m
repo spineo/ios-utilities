@@ -240,6 +240,50 @@
     return image;
 }
 
+// Draw cross-hairs
+//
++ (UIImage*)imageWithCrossHairs:(UIImage*)image {
+    
+    CGSize size = image.size;
+    
+    // Begin a graphics context of sufficient size
+    //
+    UIGraphicsBeginImageContext(size);
+    
+    // draw original image into the context]
+    //
+    [image drawAtPoint:CGPointZero];
+    
+    // Get the context for CoreGraphics
+    //
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    CGContextSetLineWidth(ctx, 2.0);
+    
+    int width = size.width   * 0.08;
+    int height = size.height * 0.08;
+    
+    [[UIColor blackColor] setStroke];
+    
+    CGFloat xpoint = (size.width  / 2.0) - width  / 2.0;
+    CGFloat ypoint = (size.height / 2.0) - height / 2.0;
+    
+    // make shape 5 px from border
+    //
+    CGRect rect = CGRectMake(xpoint, ypoint, width, height);
+    CGContextStrokeEllipseInRect(ctx, rect);
+    
+    // make image out of bitmap context
+    //
+    UIImage *retImage = UIGraphicsGetImageFromCurrentImageContext();
+    
+    // Free the context
+    //
+    UIGraphicsEndImageContext();
+    
+    
+    return retImage;
+}
+
 // resizeImage - Return resized image
 //
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size {

@@ -18,6 +18,7 @@
 + (UIColor *)colorFromHexString:(NSString *)hexString;
 + (UIColor *)setBestColorContrast:(NSString *)colorName darkColor:(UIColor *)darkColor lightColor:(UIColor *)lightColor;
 + (UIImage *)imageWithColor:(UIColor *)color objWidth:(CGFloat)width objHeight:(CGFloat)height;
++ (UIImage*)imageWithCrossHairs:(UIImage*)image;
 + (UIImage*)resizeImage:(UIImage *)image imageSize:(CGSize)size;
 + (UIImage *)renderPaint:(id)image_thumb cellWidth:(CGFloat)width cellHeight:(CGFloat)height;
 + (UIImage*)drawTapAreaLabel:(UIImage*)image count:(int)count attrs:(NSDictionary *)attrs inset:(CGFloat)inset;
