@@ -217,6 +217,24 @@
     
     return darkColor;
 }
+/// getSuggestedLineColor - Return suggested UIColor for a border to enable contrast
+//
++ (UIColor *)getSuggestedLineColor:(UIImage *)image touchPoint:(CGPoint)touchPoint suggestedLightColor:(UIColor *)lightColor suggestedDarkColor:(UIColor *)darkColor borderThreshold:(CGFloat)borderThreshold {
+    
+    UIImage *rgbCGImage = [UIImage imageWithCGImage:[image CGImage]];
+    
+    UIColor *rgbColor = [ColorUtils getPixelColorAtLocation:touchPoint image:rgbCGImage];
+    
+    CGFloat hue, sat, bri, alpha;
+    
+    [rgbColor getHue:&hue saturation:&sat brightness:&bri alpha:&alpha];
+    
+    if (bri < borderThreshold) {
+        return lightColor;
+    } else {
+        return darkColor;
+    }
+}
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // IMAGE return methods
@@ -242,7 +260,7 @@
 
 // Draw cross-hairs
 //
-+ (UIImage*)imageWithCrossHairs:(UIImage*)image {
++ (UIImage*)imageWithCrossHairs:(UIImage*)image sizeFraction:(CGFloat)sizeFraction lineColor:(UIColor *)lineColor {
     
     CGSize size = image.size;
     
@@ -257,12 +275,12 @@
     // Get the context for CoreGraphics
     //
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetLineWidth(ctx, 2.0);
+    CGContextSetLineWidth(ctx, 1.0);
     
-    int width = size.width   * 0.08;
-    int height = size.height * 0.08;
+    CGFloat width  = size.width  * sizeFraction;
+    CGFloat height = size.height * sizeFraction ;
     
-    [[UIColor blackColor] setStroke];
+    [lineColor setStroke];
     
     CGFloat xpoint = (size.width  / 2.0) - width  / 2.0;
     CGFloat ypoint = (size.height / 2.0) - height / 2.0;
